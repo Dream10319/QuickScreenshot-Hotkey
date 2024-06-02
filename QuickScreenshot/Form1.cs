@@ -46,10 +46,10 @@ namespace QuickScreenshot
             mouse_event(MOUSEEVENTF_LEFTDOWN, xpos, ypos, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, xpos, ypos, 0, 0);
         }
-        private async void HotKeyManagerPressed(object sender, KeyPressedEventArgs e)
+        public async void HotKeyManagerPressed(object sender, KeyPressedEventArgs e)
         {
-            
-            if(e.HotKey.Key == Key.S)
+            Point curPoint = System.Windows.Forms.Cursor.Position;
+            if (e.HotKey.Key == Key.S)
             {
                 bool checkresult1 = false;
                 checkresult1 = SaveSelection(true, "M", counter);
@@ -64,7 +64,7 @@ namespace QuickScreenshot
                 }
 
                 LeftMouseClick((DataContainer.SwitchTopLeft.X + DataContainer.SwitchBottomRight.X) / 2, (DataContainer.SwitchTopLeft.Y + DataContainer.SwitchBottomRight.Y) / 2);
-                await Task.Delay(3000);
+                await Task.Delay(int.Parse(DelayUpDown.Value.ToString()) * 1000);
 
                 bool checkresult2 = false;
                 checkresult2 = SaveSelection(true, "D", counter);
@@ -78,7 +78,7 @@ namespace QuickScreenshot
                     //DataContainer.CaptureCounter++;
                 }
                 LeftMouseClick((DataContainer.SwitchTopLeft.X + DataContainer.SwitchBottomRight.X) / 2, (DataContainer.SwitchTopLeft.Y + DataContainer.SwitchBottomRight.Y) / 2);
-
+                SetCursorPos(curPoint.X, curPoint.Y);
             }
             
             if(IsSuccess1 && IsSuccess2)
@@ -116,11 +116,11 @@ namespace QuickScreenshot
             {
                 if(option == "D")
                 {
-                    if (!Directory.Exists(filePath.Text + @"\Dron\"))
+                    if (!Directory.Exists(filePath.Text + @"\Drone\"))
                     {
-                        Directory.CreateDirectory(filePath.Text + @"\Dron\");
+                        Directory.CreateDirectory(filePath.Text + @"\Drone\");
                     }
-                    ScreenPath = filePath.Text + @"\Dron\" + FileName.Text + index + ".png";
+                    ScreenPath = filePath.Text + @"\Drone\" + FileName.Text + index + ".png";
                     CurrentTopLeft = DataContainer.DronTopLeft;
                     CurrentBottomRight = DataContainer.DronBottomRight;
                 }
