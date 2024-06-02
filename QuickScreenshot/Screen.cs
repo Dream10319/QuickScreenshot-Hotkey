@@ -146,10 +146,15 @@ namespace QuickScreenshot
                 DataContainer.MapTopLeft = CurrentTopLeft;
                 DataContainer.MapBottomRight = CurrentBottomRight;
             }
-            if((CurrentBottomRight.X - CurrentTopLeft.X) < 500 || (CurrentBottomRight.Y - CurrentTopLeft.Y) < 500)
+            else if (capturemode == "S")
             {
-                MessageBox.Show("Please select area at least 500*500");
+                DataContainer.SwitchTopLeft = CurrentTopLeft;
+                DataContainer.SwitchBottomRight = CurrentBottomRight;
             }
+            /*            if((CurrentBottomRight.X - CurrentTopLeft.X) < 500 || (CurrentBottomRight.Y - CurrentTopLeft.Y) < 500)
+                        {
+                            MessageBox.Show("Please select area at least 500*500");
+                        }*/
             this.Close();
             this.InstanceRef.Show();
         }

@@ -43,7 +43,11 @@ namespace QuickScreenshot
             this.DronPoint = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.SwitchPoint = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -80,10 +84,10 @@ namespace QuickScreenshot
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(590, 100);
+            this.groupBox1.Size = new System.Drawing.Size(590, 97);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Setting";
+            this.groupBox1.Text = "Setting1";
             // 
             // label2
             // 
@@ -165,7 +169,7 @@ namespace QuickScreenshot
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(223, 128);
+            this.button4.Location = new System.Drawing.Point(211, 240);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 3;
@@ -175,7 +179,7 @@ namespace QuickScreenshot
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(332, 128);
+            this.button5.Location = new System.Drawing.Point(320, 240);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 4;
@@ -183,11 +187,44 @@ namespace QuickScreenshot
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(12, 19);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(125, 32);
+            this.button6.TabIndex = 10;
+            this.button6.Text = "SetSwichButtonArea";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // SwitchPoint
+            // 
+            this.SwitchPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwitchPoint.Location = new System.Drawing.Point(143, 19);
+            this.SwitchPoint.Multiline = true;
+            this.SwitchPoint.Name = "SwitchPoint";
+            this.SwitchPoint.ReadOnly = true;
+            this.SwitchPoint.Size = new System.Drawing.Size(200, 30);
+            this.SwitchPoint.TabIndex = 11;
+            this.SwitchPoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.SwitchPoint);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Location = new System.Drawing.Point(12, 115);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(590, 68);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Setting2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 163);
+            this.ClientSize = new System.Drawing.Size(614, 275);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox1);
@@ -197,6 +234,8 @@ namespace QuickScreenshot
             this.Text = "QuickScreenshot";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -216,6 +255,9 @@ namespace QuickScreenshot
         private System.Windows.Forms.TextBox FileName;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox SwitchPoint;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
