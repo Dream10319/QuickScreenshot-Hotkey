@@ -28,8 +28,13 @@ namespace QuickScreenshot
         {
             if(e.HotKey.Key == Key.S)
             {
-                SaveSelection(true, "D");
-                SaveSelection(true, "M");
+                bool checkresult1, checkresult2 = false;
+                checkresult1 = SaveSelection(true, "D", counter);
+                checkresult2 = SaveSelection(true, "M", counter);
+                if(checkresult1 && checkresult2)
+                {
+                    counter++;
+                }
             }
             if(e.HotKey.Key == Key.L)
             {
@@ -41,7 +46,7 @@ namespace QuickScreenshot
             }
         }
 
-        public void SaveSelection(bool showCursor, string option)
+        public bool SaveSelection(bool showCursor, string option, int index)
         {
 
             Point curPos = new Point(System.Windows.Forms.Cursor.Position.X - DataContainer.DronTopLeft.X, System.Windows.Forms.Cursor.Position.Y - DataContainer.DronTopLeft.Y);
@@ -59,7 +64,7 @@ namespace QuickScreenshot
                     {
                         Directory.CreateDirectory(filePath.Text + @"\Dron\");
                     }
-                    ScreenPath = filePath.Text + @"\Dron\" + FileName.Text + counter.ToString() + ".png";
+                    ScreenPath = filePath.Text + @"\Dron\" + FileName.Text + index + ".png";
                     CurrentTopLeft = DataContainer.DronTopLeft;
                     CurrentBottomRight = DataContainer.DronBottomRight;
                 }
@@ -69,7 +74,7 @@ namespace QuickScreenshot
                     {
                         Directory.CreateDirectory(filePath.Text + @"\Map\");
                     }
-                    ScreenPath = filePath.Text + @"\Map\" + FileName.Text + counter.ToString() + ".png";
+                    ScreenPath = filePath.Text + @"\Map\" + FileName.Text + index + ".png";
                     CurrentTopLeft = DataContainer.MapTopLeft;
                     CurrentBottomRight= DataContainer.MapBottomRight;
                 }
@@ -118,8 +123,9 @@ namespace QuickScreenshot
 
             if (issuccess)
             {
-                counter++;
+                return true;
             }
+            return false;
         }
 
 
