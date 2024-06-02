@@ -57,7 +57,7 @@ namespace QuickScreenshot
         Pen MyPen = new Pen(Color.Red, 3);
         SolidBrush TransparentBrush = new SolidBrush(Color.White);
         Pen EraserPen = new Pen(Color.FromArgb(255, 255, 192), 3);
-        SolidBrush eraserBrush = new SolidBrush(Color.FromArgb(255, 255, 192));
+        SolidBrush eraserBrush = new SolidBrush(Color.Gray);
 
         protected override void OnMouseClick(MouseEventArgs e)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +12,11 @@ namespace QuickScreenshot
 
     public partial class Form1 : Form
     {
+
+        [DllImport("User32.dll")]
+        public static extern IntPtr GetDC(IntPtr hwnd);
+        [DllImport("User32.dll")]
+        public static extern void ReleaseDC(IntPtr hwnd, IntPtr dc);
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern bool SetCursorPos(int x, int y);
@@ -30,6 +36,7 @@ namespace QuickScreenshot
 
         public bool IsSuccess1 = false, IsSuccess2 = false;
         /*Monitor monitor = new Monitor();*/
+        Form f = new Form();
         public Form1()
         {
             InitializeComponent();
@@ -38,6 +45,15 @@ namespace QuickScreenshot
             _hotKeyManager.Register(Key.L, System.Windows.Input.ModifierKeys.Shift);
             _hotKeyManager.Register(Key.Q, System.Windows.Input.ModifierKeys.Shift | System.Windows.Input.ModifierKeys.Alt);
             DataContainer.CaptureCounter = 0;
+            f.BackColor = Color.White;
+            f.TransparencyKey = Color.Transparent;
+            f.AllowTransparency = true;
+            f.FormBorderStyle = FormBorderStyle.None;
+            f.Bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+            f.TopMost = true;
+            f.Paint += F_Paint;
+            Application.EnableVisualStyles();
+            f.WindowState = FormWindowState.Maximized;
         }
 
         public static void LeftMouseClick(int xpos, int ypos)
@@ -91,6 +107,7 @@ namespace QuickScreenshot
             {
                 this.Show();
                 //monitor.Close();
+                f.Hide();
             }
             if (e.HotKey.Key == Key.Q)
             {
@@ -105,10 +122,7 @@ namespace QuickScreenshot
         public bool SaveSelection(bool showCursor, string option, int index)
         {
 
-            Point curPos = new Point(System.Windows.Forms.Cursor.Position.X - DataContainer.DronTopLeft.X, System.Windows.Forms.Cursor.Position.Y - DataContainer.DronTopLeft.Y);
-            Size curSize = new Size();
-            curSize.Height = System.Windows.Forms.Cursor.Current.Size.Height;
-            curSize.Width = System.Windows.Forms.Cursor.Current.Size.Width;
+            
             bool issuccess = false;
 
             ScreenPath = "";
@@ -136,6 +150,10 @@ namespace QuickScreenshot
                 }
             }
 
+            Point curPos = new Point(System.Windows.Forms.Cursor.Position.X - CurrentTopLeft.X, System.Windows.Forms.Cursor.Position.Y - CurrentTopLeft.Y);
+            Size curSize = new Size();
+            curSize.Height = System.Windows.Forms.Cursor.Current.Size.Height;
+            curSize.Width = System.Windows.Forms.Cursor.Current.Size.Width;
 
             if (ScreenPath != "" || ScreenShot.saveToClipboard)
             {
@@ -197,7 +215,6 @@ namespace QuickScreenshot
             DronPoint.Text = "(" + DataContainer.DronTopLeft.X.ToString() + "," + DataContainer.DronTopLeft.Y.ToString() + ") " + "(" + DataContainer.DronBottomRight.X.ToString() + "," + DataContainer.DronBottomRight.Y.ToString() + ")";
             MapPoint.Text = "(" + DataContainer.MapTopLeft.X.ToString() + "," + DataContainer.MapTopLeft.Y.ToString() + ") " + "(" + DataContainer.MapBottomRight.X.ToString() + "," + DataContainer.MapBottomRight.Y.ToString() + ")";
             SwitchPoint.Text = "(" + DataContainer.SwitchTopLeft.X.ToString() + "," + DataContainer.SwitchTopLeft.Y.ToString() + ") " + "(" + DataContainer.SwitchBottomRight.X.ToString() + "," + DataContainer.SwitchBottomRight.Y.ToString() + ")";
-            base.OnPaint(e);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -228,9 +245,10 @@ namespace QuickScreenshot
                     _hotKeyManager.Register(Key.S, System.Windows.Input.ModifierKeys.None);
                     _hotKeyManager.Register(Key.Space, System.Windows.Input.ModifierKeys.None);
                     this.Hide();
-                   /* monitor.TopMost = true;
-                    monitor.Location = new Point(0, 0);
-                    monitor.Show();*/
+                    
+                    /* monitor.TopMost = true;
+                     monitor.Location = new Point(0, 0);
+                     monitor.Show();*/
                 }
                 catch
                 {
@@ -241,6 +259,18 @@ namespace QuickScreenshot
             {
                 MessageBox.Show("Please set all required fields");
             }
+
+            this.Hide();
+            f.Show();
+        }
+
+        private void F_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            Pen p = new Pen(Color.Red, 3);
+            g.DrawRectangle(p, new Rectangle(DataContainer.MapTopLeft.X - 5, DataContainer.MapTopLeft.Y - 5, DataContainer.MapBottomRight.X - DataContainer.MapTopLeft.X + 10, DataContainer.MapBottomRight.Y - DataContainer.MapTopLeft.Y + 10));
+            g.Dispose();
+            ReleaseDC(IntPtr.Zero, IntPtr.Zero);
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

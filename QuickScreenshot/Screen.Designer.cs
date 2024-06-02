@@ -38,7 +38,7 @@
             this.ClientSize = new System.Drawing.Size(640, 410);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Screen";
-            this.Opacity = 0.1D;
+            this.Opacity = 0.12D;
             this.Text = "Screen";
             this.TransparencyKey = System.Drawing.Color.White;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

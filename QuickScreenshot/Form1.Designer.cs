@@ -46,9 +46,9 @@ namespace QuickScreenshot
             this.button6 = new System.Windows.Forms.Button();
             this.SwitchPoint = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.DelayUpDown = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.DelayUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DelayUpDown)).BeginInit();
@@ -226,14 +226,14 @@ namespace QuickScreenshot
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Setting2";
             // 
-            // label3
+            // label4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(349, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "SetDealy:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(530, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "seconds";
             // 
             // DelayUpDown
             // 
@@ -248,14 +248,14 @@ namespace QuickScreenshot
             0,
             0});
             // 
-            // label4
+            // label3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(530, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "seconds";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(349, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "SetDealy:";
             // 
             // Form1
             // 
