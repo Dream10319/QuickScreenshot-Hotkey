@@ -108,6 +108,8 @@ namespace QuickScreenshot
                 this.Show();
                 //monitor.Close();
                 f.Hide();
+                _hotKeyManager.Unregister(Key.S, System.Windows.Input.ModifierKeys.None);
+                _hotKeyManager.Unregister(Key.Space, System.Windows.Input.ModifierKeys.None);
             }
             if (e.HotKey.Key == Key.Q)
             {
@@ -275,7 +277,8 @@ namespace QuickScreenshot
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            _hotKeyManager.Unregister(Key.S, System.Windows.Input.ModifierKeys.Shift);
+            _hotKeyManager.Unregister(Key.S, System.Windows.Input.ModifierKeys.None);
+            _hotKeyManager.Unregister(Key.Space, System.Windows.Input.ModifierKeys.None);
             _hotKeyManager.Unregister(Key.L, System.Windows.Input.ModifierKeys.Shift);
             _hotKeyManager.Unregister(Key.Q, System.Windows.Input.ModifierKeys.Shift | System.Windows.Input.ModifierKeys.Alt);
             _hotKeyManager.Dispose();
